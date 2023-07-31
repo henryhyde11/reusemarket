@@ -2,7 +2,7 @@ export function CarForm() {
   return (
     <>
       <main className="w-full grid">
-        <h2 className="p-5 text-2xl text-center font-bold lg:text-3xl">
+        <h2 className="p-5 text-2xl text-center font-normal lg:text-3xl">
           Información de entrega
         </h2>
 
@@ -15,7 +15,7 @@ export function CarForm() {
               </span>
             </div>
 
-            <ul className="grid border-2 border-gray-900">
+            <ul className="grid border border-gray-900">
               <CarElement />
               <CarElement />
               <CarElement />
@@ -23,7 +23,7 @@ export function CarForm() {
 
             <form>
               <div className="grid grid-cols-2 gap-4">
-                <input className="p-2 border-2 border-slate-900" type="text" placeholder="Código" />
+                <input className="p-2 border border-slate-900" type="text" placeholder="Código" />
                 <button className="p-2 bg-gray-900 text-white text-lg" type="submit">
                   Redimir
                 </button>
@@ -47,7 +47,7 @@ export function CarForm() {
 
                 <div className="max-sm:grid max-sm:gap-4 sm:flex sm:justify-between">
                   <div className="sm:w-24 flex flex-col gap-1 text-md">
-                    <select className="p-1 border-2 border-gray-900">
+                    <select className="p-1 border border-slate-900">
                       <option hidden selected>País</option>
                       <option>Colombia</option>
                       <option>Panamá</option>
@@ -56,7 +56,7 @@ export function CarForm() {
                   </div>
 
                   <div className="flex flex-col text-md">
-                    <select className="sm:w-24 p-1 border-2 border-gray-900" placeholder="ciudad">
+                    <select className="sm:w-24 p-1 border border-slate-900" placeholder="ciudad">
                       <option hidden selected>Ciudad</option>
                       <option>Medellín</option>
                       <option>Bello</option>
@@ -65,13 +65,13 @@ export function CarForm() {
                   </div>
 
                   <div className="flex flex-col text-md">
-                    <input className="p-1 sm:w-28 sm:h-9 border-2 border-gray-900" type="text" placeholder="Código postal"/>
+                    <input className="p-1 sm:w-28 sm:h-9 border border-slate-900" type="text" placeholder="Código postal"/>
                   </div>
                 </div>
               </div>
 
               <div className="grid gap-2">
-                <h4 className="text-2xl font-bold">Información de pago</h4>
+                <h4 className="text-2xl font-normal">Información de pago</h4>
                 <div>
                   <FormInputRadio textLabel={"Tarjeta de crédito"} />
                   <FormInputRadio textLabel={"Tarjeta de débito"} />
@@ -115,7 +115,7 @@ function FormInput({ type, placeholder }) {
   return (
     <>
       <div className="flex flex-col text-md xl:w-full">
-        <input className="p-1 border-2 border-slate-900" type={type} placeholder={placeholder}/>
+        <input className="p-1 border border-slate-900" type={type} placeholder={placeholder}/>
       </div>
     </>
   );

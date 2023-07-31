@@ -62,10 +62,10 @@ export function Footer() {
               <div className="flex flex-col gap-2">
                 <input
                   type="text"
-                  className="border-2 border-gray-400 px-2"
+                  className="border border-slate-900 px-2"
                   placeholder="Correo electrónico"
                 />
-                <button className="border-2 border-gray-400 px-2" type="button">
+                <button className="border border-slate-900 px-2" type="button">
                   Suscribete
                 </button>
               </div>
