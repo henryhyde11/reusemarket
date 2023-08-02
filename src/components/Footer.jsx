@@ -65,7 +65,10 @@ export function Footer() {
                   className="border border-slate-900 px-2"
                   placeholder="Correo electrónico"
                 />
-                <button className="border border-slate-900 px-2" type="button">
+                <button
+                  className="text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2  dark:hover:bg-gray-700"
+                  type="button"
+                >
                   Suscribete
                 </button>
               </div>
