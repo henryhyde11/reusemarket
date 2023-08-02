@@ -23,8 +23,8 @@ export function CarForm() {
 
             <form>
               <div className="grid grid-cols-2 gap-4">
-                <input className="p-2 border border-slate-900" type="text" placeholder="Código" />
-                <button className="p-2 bg-gray-900 text-white text-lg" type="submit">
+                <input className="p-1 border border-slate-900" type="text" placeholder="Código" />
+                <button className="text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2  dark:hover:bg-gray-700" type="submit">
                   Redimir
                 </button>
               </div>
@@ -46,8 +46,8 @@ export function CarForm() {
                 />
 
                 <div className="max-sm:grid max-sm:gap-4 sm:flex sm:justify-between">
-                  <div className="sm:w-24 flex flex-col gap-1 text-md">
-                    <select className="p-1 border border-slate-900">
+                  <div className="flex flex-col gap-1 text-md">
+                    <select className="sm:w-24 p-1 border border-slate-900">
                       <option hidden selected>País</option>
                       <option>Colombia</option>
                       <option>Panamá</option>
@@ -65,7 +65,7 @@ export function CarForm() {
                   </div>
 
                   <div className="flex flex-col text-md">
-                    <input className="p-1 sm:w-28 sm:h-9 border border-slate-900" type="text" placeholder="Código postal"/>
+                    <input className="p-1 sm:w-28 border border-slate-900" type="text" placeholder="Código postal"/>
                   </div>
                 </div>
               </div>
@@ -86,7 +86,7 @@ export function CarForm() {
                 <FormInput type={"text"} placeholder={"CVC"} />
               </div>
 
-              <button className="p-2 bg-gray-900 text-white text-lg" type="submit">
+              <button className="text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2  dark:hover:bg-gray-700" type="submit">
                 Finalizar compra
               </button>
             </form>
