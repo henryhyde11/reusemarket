@@ -75,7 +75,7 @@ export function HeroClothe() {
       {/* SLIDEBAR DESKTOP  */}
 
       <div className="sm:flex sm:mt-10">
-        <aside className="hidden sm:flex sm:p-5">
+        <aside className="hidden sm:h-screen sm:flex sm:p-5 sm:sticky sm:top-0">
           <div className="flex flex-col gap-2">
             <article className="flex flex-col">
               <h2 className="text-3xl font-bold">Filtros</h2>

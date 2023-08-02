@@ -14,7 +14,10 @@ export function Header() {
   const [dark] = useState(location.pathname === "/home");
 
   function handleScroll() {
-    if (window.scrollY > 60) {
+    if (
+      window.scrollY > 60 &&
+      location.pathname !== ("/men" || "/women" || "kids")
+    ) {
       setIsFixed(true);
     } else {
       setIsFixed(false);
