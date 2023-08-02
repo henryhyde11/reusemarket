@@ -68,7 +68,7 @@ function BtnColor({ bgColor }) {
 function BtnSize({ children }) {
   return (
     <>
-      <span className="w-7 h-7 flex items-center justify-center p-1 text-md border border-slate-900 cursor-pointer hover:bg-slate-500 hover:text-white">
+      <span className="w-7 h-7 flex items-center justify-center text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2  dark:hover:bg-gray-700 cursor-pointer hover:text-white">
         {children}
       </span>
     </>
@@ -92,7 +92,7 @@ function MyModal() {
         <button
           type="button"
           onClick={openModal}
-          className="p-1 border border-slate-900 bg-opacity-20 px-4 py-2 text-sm font-medium hover:bg-gray-200 hover:"
+          className="text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2  dark:hover:bg-gray-700"
         >
           Añadir al carrito
         </button>
