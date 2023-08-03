@@ -1,6 +1,7 @@
 import { Header } from "../components/Header";
 import { HeroClothe } from "../components/HeroClothe";
 import { Footer } from "../components/Footer";
+import { ScrollToTop } from "../components/ScrollToTop";
 
 export function Clothe () {
   return (
@@ -8,6 +9,7 @@ export function Clothe () {
       <Header/>
       <HeroClothe/>
       <Footer/>
+      <ScrollToTop/>
     </>
   )
 }
