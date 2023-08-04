@@ -6,10 +6,10 @@ import { ScrollToTop } from "../components/ScrollToTop";
 export function Home() {
   return (
     <>
-      <Header/>
-      <HeroHome/>
-      <Footer/>
-      <ScrollToTop/>
+      <Header />
+      <HeroHome />
+      <Footer />
+      <ScrollToTop />
     </>
-  )
+  );
 }

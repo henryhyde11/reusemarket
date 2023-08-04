@@ -171,7 +171,7 @@ function MyModal() {
                       </article>
 
                       <article>
-                        <button type="button" className="p-1 border border-slate-900">
+                        <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2  dark:hover:bg-gray-700">
                           <Link to={"/car"}>Ver carrito</Link>
                         </button>
                       </article>

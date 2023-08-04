@@ -2,14 +2,17 @@ import { Header } from "../components/Header";
 import { DetailComponent } from "../components/DetailComponent";
 import { Footer } from "../components/Footer";
 import { ScrollToTop } from "../components/ScrollToTop";
+import { ContextProvider } from "../context/GlobalContext";
 
-export function Detail () {
+export function Detail() {
   return (
     <>
-      <Header/>
-      <DetailComponent/>
-      <Footer/>
-      <ScrollToTop/>
+      <ContextProvider>
+        <Header />
+        <DetailComponent />
+        <Footer />
+        <ScrollToTop />
+      </ContextProvider>
     </>
-  )
+  );
 }

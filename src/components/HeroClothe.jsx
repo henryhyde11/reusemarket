@@ -1,18 +1,8 @@
 import { useLocation } from "react-router-dom";
-import clotheSample from "../assets/image-muestra.png";
 import { Link } from "react-router-dom";
+import { GlobalContext } from "../context/GlobalContext";
+import { useContext } from "react";
 
-const clothe = [
-  { id: "0", title: "Camiseta negra", image: clotheSample, price: "200" },
-  { id: "1", title: "Camiseta blanca", image: clotheSample, price: "200" },
-  { id: "2", title: "Camiseta rosa", image: clotheSample, price: "200" },
-  { id: "3", title: "Zapatos negros", image: clotheSample, price: "250" },
-  { id: "4", title: "Zapatos blancos", image: clotheSample, price: "250" },
-  { id: "5", title: "Zapatos rosa", image: clotheSample, price: "250" },
-  { id: "6", title: "Sombrero negro", image: clotheSample, price: "100" },
-  { id: "7", title: "Sombre blanco", image: clotheSample, price: "100" },
-  { id: "28", title: "Sombre rosa", image: clotheSample, price: "100" },
-];
 
 export function HeroClothe() {
   const location = useLocation();
@@ -124,7 +114,9 @@ function BtnCheck({ children }) {
 }
 
 function CardClothe() {
-  return clothe.map((element) => (
+  const { initialState } = useContext(GlobalContext)
+
+  return initialState.map((element) => (
     <article
       key={element.id}
       className="grid gap-2 rounded-lg shadow-lg cursor-pointer hover:shadow-sky-500 max-sm:max-w-xs"
