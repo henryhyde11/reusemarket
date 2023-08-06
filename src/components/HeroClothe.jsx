@@ -1,11 +1,11 @@
-import { useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { products } from "../data/data";
 import { useState } from "react";
+import { useLocation, Link } from "react-router-dom";
+
+import { products } from "../data/dataProducts";
 
 export function HeroClothe() {
   const [initialState] = useState(products);
-   
+
   const [filters, setFilters] = useState({
     category: "all",
   });
@@ -21,10 +21,10 @@ export function HeroClothe() {
   const filteredCategory = filterProducts(initialState);
 
   function onChangeCategory(event) {
-    setFilters((prevState) => ({
-      ...prevState,
+    setFilters({
+      ...filters,
       category: event.target.value,
-    }));
+    });
   }
 
   const location = useLocation();
@@ -74,8 +74,14 @@ export function HeroClothe() {
             </article>
 
             <article className="flex gap-2 sm:flex-col">
-              <label htmlFor="category">Categoría</label>
-              <select id="category" onChange={onChangeCategory}>
+              <label htmlFor="category" className="text-lg">
+                Categoría
+              </label>
+              <select
+                className="cursor-pointer border border-slate-900"
+                id="category"
+                onChange={onChangeCategory}
+              >
                 <option value="all">Todas</option>
                 <option value="camiseta">Camiseta</option>
                 <option value="sombrero">Sombrero</option>
