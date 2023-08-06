@@ -62,7 +62,7 @@ export function HeroWomen() {
               key={element.id}
               className="grid gap-2 rounded-lg shadow-lg cursor-pointer hover:shadow-sky-500 max-sm:max-w-xs"
             >
-              <Link to={"/detail"}>
+              <Link to={`/detail/${element.id}`}>
                 <img className="" src={element.image} alt={element.title} />
 
                 <div className="grid gap-1 p-2 text-lg">

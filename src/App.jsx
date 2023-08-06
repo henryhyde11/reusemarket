@@ -15,7 +15,7 @@ export function App() {
         <Route path="/" element={<Navigate to="/home" replace />} />
         <Route path="/home" element={<Home />}/>
         <Route path="/women" element={<Women/>}/>
-        <Route path="/detail" element={<Detail/>}/>
+        <Route path="/detail/:id" element={<Detail/>}/>
         {/* <Route path="/men" element={<Clothe/>}/> */}
         {/* <Route path="/kids" element={<Clothe/>}/> */}
         <Route path="/we" element={<We/>}/>

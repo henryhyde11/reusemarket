@@ -1,28 +1,49 @@
-import imageMuestra from "../assets/image-muestra.png";
 import { BsCircleFill } from "react-icons/bs";
 
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { Fragment, useContext, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { ProductContext } from "../context/ProductContext";
 
 export function DetailComponent() {
+  const { women } = useContext(ProductContext);
+
+  const [detail, setDetail] = useState({
+    id: "",
+    title: "",
+    image: "",
+    price: "",
+    discount: "",
+    category: "",
+  });
+
+  const params = useParams();
+
+  useEffect(() =>{
+    const detailFound = women.find(element => element.id === params.id);
+
+    if (detailFound) {
+      setDetail(detailFound)
+    } 
+  }, [params.id, detail])
+
   return (
     <main className="w-full flex flex-col items-center p-5 sm:flex-row sm:justify-center sm:gap-4 md:gap-6">
       <section className="w-fit h-fit flex py-4">
         <img
-          className="w-44 h-44 rounded-xl sm:w-72 sm:h-72 md:w-80 md:h-80"
-          src={imageMuestra}
+          className="object-cover w-44 h-44 rounded-xl sm:w-72 sm:h-72 md:w-80 md:h-80"
+          src={detail.image}
           alt="image-muestra"
         />
       </section>
 
       <section className="grid gap-4">
-        <h1 className="text-3xl font-normal">Chaqueta</h1>
+        <h1 className="text-3xl font-normal">{detail.title}</h1>
 
         <article className="flex justify-between items-center gap-1">
-          <p className="text-xl font-normal">$200</p>
+          <p className="text-xl font-normal">${detail.price}</p>
           <p className="text-xs font-extralight">
-            o <span className="font-normal">4 cuotas de $25.00</span> más
+            o <span className="font-normal">{detail.discount}</span> más
             interés bancarios
           </p>
         </article>
@@ -51,7 +72,7 @@ export function DetailComponent() {
           <p className="font-extralight">Guía de tallas</p>
         </article>
 
-        <MyModal />
+        <MyModal detail={detail}/>
       </section>
     </main>
   );
@@ -75,7 +96,7 @@ function BtnSize({ children }) {
   );
 }
 
-function MyModal() {
+function MyModal({detail}) {
   let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -145,17 +166,17 @@ function MyModal() {
                     <section>
                       <article className="flex flex-col items-center">
                         <img
-                          src={imageMuestra}
-                          className="w-28 h-28 rounded-sm sm:w-32 sm:h-32"
+                          src={detail.image}
+                          className="object-cover w-28 h-28 rounded-sm sm:w-32 sm:h-32"
                           alt="image-muestra"
                         />
                       </article>
 
                       <article>
                         <div className="flex justify-between">
-                          <h1>Chaqueta</h1>
-                          <h2>$ 200</h2>
+                          <h1>{detail.title}</h1>
                         </div>
+
                         <h2>Color: </h2>
                         <h2>Talla: </h2>
                         <h2>Cantidad: </h2>
@@ -171,7 +192,10 @@ function MyModal() {
                       </article>
 
                       <article>
-                        <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2  dark:hover:bg-gray-700">
+                        <button
+                          type="button"
+                          className="text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2  dark:hover:bg-gray-700"
+                        >
                           <Link to={"/car"}>Ver carrito</Link>
                         </button>
                       </article>

@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
 import { Bars3Icon } from "@heroicons/react/20/solid";
 import { FaShoppingCart } from "react-icons/fa";
+import logoIcon from "/logo.svg";
 
 export function Header() {
   const location = useLocation();
@@ -58,7 +59,7 @@ export function Header() {
         >
           <span className="flex max-md:order-first">
             <Link to={"/home"}>
-              <img src="logo.svg" className="w-10" alt="logo-image" />
+              <img src={logoIcon} className="w-10" alt="logo-image" />
             </Link>
           </span>
 
