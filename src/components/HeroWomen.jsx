@@ -1,24 +1,12 @@
-import { useState } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { ProductContext } from "../context/ProductContext";
 
-import { products } from "../data/dataProducts";
+export function HeroWomen() {
+  const { women, filters, setFilters, filterProducts } =
+    useContext(ProductContext);
 
-export function HeroClothe() {
-  const [initialState] = useState(products);
-
-  const [filters, setFilters] = useState({
-    category: "all",
-  });
-
-  function filterProducts(products) {
-    return products.filter((product) => {
-      return (
-        filters.category === "all" || product.category === filters.category
-      );
-    });
-  }
-
-  const filteredCategory = filterProducts(initialState);
+  const filteredCategory = filterProducts(women);
 
   function onChangeCategory(event) {
     setFilters({
@@ -27,41 +15,16 @@ export function HeroClothe() {
     });
   }
 
-  const location = useLocation();
-
-  function h1Title() {
-    switch (location.pathname) {
-      case "/women":
-        return "Mujer";
-      case "/men":
-        return "Hombre";
-      case "/kids":
-        return "Niños";
-      default:
-        return "";
-    }
-  }
-
-  function pTitle() {
-    switch (location.pathname) {
-      case "/women":
-        return "Descubre nuestra exclusiva selección de productos diseñados pensando en ti, mujer moderna y sofisticada.";
-      case "/men":
-        return "Bienvenido a nuestra colección para hombres, donde la calidad y el estilo se unen para brindarte lo mejor en moda y funcionalidad.";
-      case "/kids":
-        return "¡La diversión y la alegría están aseguradas con nuestra adorable colección de productos para niños! Diseñados para acompañar a los más pequeños en todas sus aventuras.";
-      default:
-        return "";
-    }
-  }
-
   return (
     <>
       {/* <!-- MAIN --> */}
 
       <main className="w-full grid gap-2 p-5 bg-slate-900 text-white sm:p-10">
-        <h1 className="text-4xl font-bold sm:text-5xl">{h1Title()}</h1>
-        <p className="text-md font-thin sm:text-2xl">{pTitle()}</p>
+        <h1 className="text-4xl font-bold sm:text-5xl">Mujer</h1>
+        <p className="text-md font-thin sm:text-2xl">
+          Descubre nuestra exclusiva selección de productos diseñados pensando
+          en ti, mujer moderna y sofisticada.
+        </p>
       </main>
 
       {/* SLIDEBAR */}
