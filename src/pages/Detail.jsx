@@ -2,16 +2,20 @@ import { Header } from "../components/Header";
 import { DetailComponent } from "../components/DetailComponent";
 import { Footer } from "../components/Footer";
 import { ScrollToTop } from "../components/ScrollToTop";
-import { ProductContextProvider } from "../context/ProductContext";
+
+import { ProductContextProvider } from "../context/Product";
+import { CarListContextProvider } from "../context/CarList";
 
 export function Detail() {
   return (
     <>
       <ProductContextProvider>
-        <Header />
-        <DetailComponent />
-        <Footer />
-        <ScrollToTop />
+        <CarListContextProvider>
+          <Header />
+          <DetailComponent />
+          <Footer />
+          <ScrollToTop />
+        </CarListContextProvider>
       </ProductContextProvider>
     </>
   );

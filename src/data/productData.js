@@ -17,6 +17,7 @@ export const products = {
       price: "200",
       category: "camiseta",
       discount: "4 cuotas de $50",
+      color: "black",
     },
     {
       id: "1",
@@ -25,6 +26,7 @@ export const products = {
       price: "200",
       discount: "4 cuotas de $50",
       category: "camiseta",
+      color: "white",
     },
     {
       id: "2",
@@ -33,6 +35,7 @@ export const products = {
       price: "200",
       discount: "4 cuotas de $50",
       category: "camiseta",
+      color: "red",
     },
     {
       id: "3",
@@ -41,6 +44,7 @@ export const products = {
       price: "250",
       discount: "4 cuotas de $62.5",
       category: "zapatos",
+      color: "black",
     },
     {
       id: "4",
@@ -49,6 +53,7 @@ export const products = {
       price: "250",
       discount: "4 cuotas de $62.5",
       category: "zapatos",
+      color: "white",
     },
     {
       id: "5",
@@ -57,6 +62,7 @@ export const products = {
       price: "250",
       discount: "4 cuotas de $62.5",
       category: "zapatos",
+      color: "red",
     },
     {
       id: "6",
@@ -65,6 +71,7 @@ export const products = {
       price: "100",
       discount: "4 cuotas de $25",
       category: "sombrero",
+      color: "black",
     },
     {
       id: "7",
@@ -73,6 +80,7 @@ export const products = {
       price: "100",
       discount: "4 cuotas de $25",
       category: "sombrero",
+      color: "white",
     },
     {
       id: "8",
@@ -81,6 +89,7 @@ export const products = {
       price: "100",
       discount: "4 cuotas de $25",
       category: "sombrero",
+      color: "red",
     },
   ],
 };

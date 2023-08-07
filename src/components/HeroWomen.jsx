@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { ProductContext } from "../context/ProductContext";
+import { ProductContext } from "../context/Product";
 
 export function HeroWomen() {
   const { women, filters, setFilters, filterProducts } =

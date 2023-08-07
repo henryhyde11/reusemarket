@@ -3,10 +3,19 @@ import { BsCircleFill } from "react-icons/bs";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ProductContext } from "../context/ProductContext";
+
+import { ProductContext } from "../context/Product";
+import { CarListContext } from "../context/CarList";
 
 export function DetailComponent() {
   const { women } = useContext(ProductContext);
+  const { addToCart } = useContext(CarListContext);
+
+  const params = useParams();
+
+  const [product, setProduct] = useState({});
+  
+  const [disabledBtn, setDisabledBtn] = useState(true);
 
   const [detail, setDetail] = useState({
     id: "",
@@ -15,17 +24,17 @@ export function DetailComponent() {
     price: "",
     discount: "",
     category: "",
+    color: "",
   });
 
-  const params = useParams();
 
-  useEffect(() =>{
-    const detailFound = women.find(element => element.id === params.id);
+  useEffect(() => {
+    const detailFound = women.find((element) => element.id === params.id);
 
     if (detailFound) {
-      setDetail(detailFound)
-    } 
-  }, [params.id, detail])
+      setDetail(detailFound);
+    }
+  }, [params.id, detail]);
 
   return (
     <main className="w-full flex flex-col items-center p-5 sm:flex-row sm:justify-center sm:gap-4 md:gap-6">
@@ -43,61 +52,117 @@ export function DetailComponent() {
         <article className="flex justify-between items-center gap-1">
           <p className="text-xl font-normal">${detail.price}</p>
           <p className="text-xs font-extralight">
-            o <span className="font-normal">{detail.discount}</span> más
-            interés bancarios
+            o <span className="font-normal">{detail.discount}</span> más interés
+            bancarios
           </p>
         </article>
 
         <article className="grid gap-1">
           <p className="text-lg font-extralight">Color</p>
-          <div className="flex gap-2">
-            <BtnColor bgColor={"text-yellow-500"} />
-            <BtnColor bgColor={"text-blue-500"} />
-            <BtnColor bgColor={"text-gray-500"} />
-            <BtnColor bgColor={"text-black-500"} />
+
+          <div>
+            <BtnColor detailColor={detail.color} />
           </div>
         </article>
 
         <article className="grid gap-1">
           <p className="text-lg font-extralight">Tallas</p>
+          {disabledBtn ? (
+            <span className="text-sm font-thin text-red-400">Seleccione una talla</span>
+          ) : (
+            ""
+          )}
 
-          <div className="flex gap-1">
-            <BtnSize>XS</BtnSize>
-            <BtnSize>S</BtnSize>
-            <BtnSize>M</BtnSize>
-            <BtnSize>L</BtnSize>
-            <BtnSize>XL</BtnSize>
+          <div className="flex gap-1.5">
+            <BtnSize
+              setProduct={setProduct}
+              detail={detail}
+              setDisabledBtn={setDisabledBtn}
+              disabledBtn={disabledBtn}
+            >
+              XS
+            </BtnSize>
+            <BtnSize
+              setProduct={setProduct}
+              detail={detail}
+              setDisabledBtn={setDisabledBtn}
+            >
+              S
+            </BtnSize>
+            <BtnSize
+              setProduct={setProduct}
+              detail={detail}
+              setDisabledBtn={setDisabledBtn}
+            >
+              M
+            </BtnSize>
+            <BtnSize
+              setProduct={setProduct}
+              detail={detail}
+              setDisabledBtn={setDisabledBtn}
+            >
+              L
+            </BtnSize>
+            <BtnSize
+              setProduct={setProduct}
+              detail={detail}
+              setDisabledBtn={setDisabledBtn}
+            >
+              XL
+            </BtnSize>
           </div>
 
           <p className="font-extralight">Guía de tallas</p>
         </article>
 
-        <MyModal detail={detail}/>
+        <BtnAdd
+          product={product}
+          addToCart={addToCart}
+          disabledBtn={disabledBtn}
+        />
       </section>
     </main>
   );
 }
 
-function BtnColor({ bgColor }) {
+function BtnColor({ detailColor }) {
+  function color() {
+    switch (detailColor) {
+      case "white":
+        return "text-white border border-black rounded-3xl";
+      case "black":
+        return "text-black";
+      case "red":
+        return "text-red-400";
+      default:
+        return "";
+    }
+  }
+
   return (
     <>
-      <BsCircleFill className={`${bgColor} cursor-pointer`} size={40} />
+      <BsCircleFill className={color()} size={40} />
     </>
   );
 }
 
-function BtnSize({ children }) {
+function BtnSize({ children, setProduct, detail, setDisabledBtn }) {
   return (
     <>
-      <span className="w-7 h-7 flex items-center justify-center text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2  dark:hover:bg-gray-700 cursor-pointer hover:text-white">
+      <button
+        className="w-7 h-7 flex items-center justify-center text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2  dark:hover:bg-gray-700 cursor-pointer hover:text-white focus:outline-none focus:ring focus:ring-black"
+        onClick={() => {
+          setProduct({ ...detail, size: children.toLowerCase() }), setDisabledBtn(false);
+        }}
+      >
         {children}
-      </span>
+      </button>
     </>
   );
 }
 
-function MyModal({detail}) {
-  let [isOpen, setIsOpen] = useState(false);
+function BtnAdd({ product, addToCart, disabledBtn }) {
+  const [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
     setIsOpen(false);
@@ -105,6 +170,7 @@ function MyModal({detail}) {
 
   function openModal() {
     setIsOpen(true);
+    addToCart(product);
   }
 
   return (
@@ -113,7 +179,8 @@ function MyModal({detail}) {
         <button
           type="button"
           onClick={openModal}
-          className="text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2  dark:hover:bg-gray-700"
+          className="text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2 dark:hover:bg-gray-700"
+          disabled={disabledBtn}
         >
           Añadir al carrito
         </button>
@@ -166,7 +233,7 @@ function MyModal({detail}) {
                     <section>
                       <article className="flex flex-col items-center">
                         <img
-                          src={detail.image}
+                          src={product.image}
                           className="object-cover w-28 h-28 rounded-sm sm:w-32 sm:h-32"
                           alt="image-muestra"
                         />
@@ -174,21 +241,21 @@ function MyModal({detail}) {
 
                       <article>
                         <div className="flex justify-between">
-                          <h1>{detail.title}</h1>
+                          <h1>{product.title}</h1>
                         </div>
 
-                        <h2>Color: </h2>
-                        <h2>Talla: </h2>
-                        <h2>Cantidad: </h2>
+                        <h2>Color: {product.color}</h2>
+                        <h2>Talla: {product.size} </h2>
+                        <h2>Cantidad: 1</h2>
                       </article>
                     </section>
 
                     <section className="flex flex-col gap-2 sm:gap-4">
                       <article>
                         <h2 className="font-medium">Tu carrito</h2>
-                        <h2>Costo total de los productos:</h2>
-                        <h2>Costo de envío: </h2>
-                        <h2 className="font-medium">Total: </h2>
+                        <h2>Costo total de los productos: {product.price}</h2>
+                        <h2>Costo de envío: Gratis</h2>
+                        <h2 className="font-medium">Total: {product.price}</h2>
                       </article>
 
                       <article>

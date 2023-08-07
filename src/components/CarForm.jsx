@@ -1,4 +1,33 @@
+import { useContext } from "react";
+import { CarListContext } from "../context/CarList";
+
 export function CarForm() {
+  const { cart } = useContext(CarListContext);
+
+  function showCart() {
+    if (cart == 0) {
+      return (
+        <li className="text-center">
+          <h1 className="p-2 text-2xl text-white font-semibold bg-sky-400 rounded-3xl">
+            Añadir elementos al carrito
+          </h1>
+        </li>
+      );
+    } else {
+      cart.map((element) => (
+        <li className="flex justify-between p-3 border border-gray-900">
+          <div className="flex flex-col gap-2">
+            <h6 className="text-lg">{element.title}</h6>
+            <div className="w-24 h-24 rounded-lg bg-gray-500"></div>
+          </div>
+          <span></span>
+        </li>
+      ));
+    }
+
+    console.log(cart)
+  }
+
   return (
     <>
       <main className="w-full grid">
@@ -11,20 +40,23 @@ export function CarForm() {
             <div className="flex items-center justify-between lg:">
               <h4 className="text-2xl">Tu carrito</h4>
               <span className="px-2 text-white rounded-full bg-slate-500">
-                3
+                0
               </span>
             </div>
 
-            <ul className="grid border border-gray-900">
-              <CarElement />
-              <CarElement />
-              <CarElement />
-            </ul>
+            <ul className="grid">{showCart()}</ul>
 
             <form>
               <div className="grid grid-cols-2 gap-4">
-                <input className="p-1 border border-slate-900" type="text" placeholder="Código" />
-                <button className="text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2  dark:hover:bg-gray-700" type="submit">
+                <input
+                  className="p-1 border border-slate-900"
+                  type="text"
+                  placeholder="Código"
+                />
+                <button
+                  className="text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2  dark:hover:bg-gray-700"
+                  type="submit"
+                >
                   Redimir
                 </button>
               </div>
@@ -36,19 +68,13 @@ export function CarForm() {
               <div className="grid gap-4">
                 <FormInput type={"text"} placeholder={"Nombres"} />
                 <FormInput type={"text"} placeholder={"Apellidos"} />
-                <FormInput
-                  type={"email"}
-                  placeholder={"Email"}
-                />
-                <FormInput
-                  type={"text"}
-                  placeholder={"Dirección"}
-                />
+                <FormInput type={"email"} placeholder={"Email"} />
+                <FormInput type={"text"} placeholder={"Dirección"} />
 
                 <div className="max-sm:grid max-sm:gap-4 sm:flex sm:justify-between">
                   <div className="flex flex-col gap-1 text-md">
                     <select className="sm:w-24 p-1 border border-slate-900">
-                      <option hidden selected>País</option>
+                      <option hidden>País</option>
                       <option>Colombia</option>
                       <option>Panamá</option>
                       <option>México</option>
@@ -56,8 +82,11 @@ export function CarForm() {
                   </div>
 
                   <div className="flex flex-col text-md">
-                    <select className="sm:w-24 p-1 border border-slate-900" placeholder="ciudad">
-                      <option hidden selected>Ciudad</option>
+                    <select
+                      className="sm:w-24 p-1 border border-slate-900"
+                      placeholder="ciudad"
+                    >
+                      <option hidden>Ciudad</option>
                       <option>Medellín</option>
                       <option>Bello</option>
                       <option>París</option>
@@ -65,7 +94,11 @@ export function CarForm() {
                   </div>
 
                   <div className="flex flex-col text-md">
-                    <input className="p-1 sm:w-28 border border-slate-900" type="text" placeholder="Código postal"/>
+                    <input
+                      className="p-1 sm:w-28 border border-slate-900"
+                      type="text"
+                      placeholder="Código postal"
+                    />
                   </div>
                 </div>
               </div>
@@ -86,7 +119,10 @@ export function CarForm() {
                 <FormInput type={"text"} placeholder={"CVC"} />
               </div>
 
-              <button className="text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2  dark:hover:bg-gray-700" type="submit">
+              <button
+                className="text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2  dark:hover:bg-gray-700"
+                type="submit"
+              >
                 Finalizar compra
               </button>
             </form>
@@ -97,25 +133,15 @@ export function CarForm() {
   );
 }
 
-function CarElement() {
-  return (
-    <>
-      <li className="flex justify-between p-3">
-        <div className="flex flex-col gap-2">
-          <h6 className="text-lg">Chaqueta</h6>
-          <div className="w-24 h-24 rounded-lg bg-gray-500"></div>
-        </div>
-        <span>$120</span>
-      </li>
-    </>
-  );
-}
-
 function FormInput({ type, placeholder }) {
   return (
     <>
       <div className="flex flex-col text-md xl:w-full">
-        <input className="p-1 border border-slate-900" type={type} placeholder={placeholder}/>
+        <input
+          className="p-1 border border-slate-900"
+          type={type}
+          placeholder={placeholder}
+        />
       </div>
     </>
   );
