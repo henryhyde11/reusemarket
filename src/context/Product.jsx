@@ -2,8 +2,7 @@ import { products } from "../data/productData";
 
 import { createContext, useState } from "react";
 
-
-export const ProductContext = createContext(products);
+export const ProductContext = createContext();
 
 export function ProductContextProvider({ children }) {
   const [productsState] = useState(products);

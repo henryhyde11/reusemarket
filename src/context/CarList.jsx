@@ -3,6 +3,16 @@ import { createContext, useState } from "react";
 export const CarListContext = createContext();
 
 export function CarListContextProvider({ children }) {
+  const [detail, setDetail] = useState({
+    id: "",
+    title: "",
+    image: "",
+    price: "",
+    discount: "",
+    category: "",
+    color: "",
+  });
+
   const [cart, setCart] = useState([]);
 
   function addToCart(product) {
@@ -14,7 +24,7 @@ export function CarListContextProvider({ children }) {
   }
 
   return (
-    <CarListContext.Provider value={{ cart, addToCart, cleanCart }}>
+    <CarListContext.Provider value={{ detail, setDetail, cart, addToCart, cleanCart }}>
       {children}
     </CarListContext.Provider>
   );

@@ -1,5 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+
 import { ProductContext } from "../context/Product";
 
 export function HeroWomen() {
@@ -8,10 +9,10 @@ export function HeroWomen() {
 
   const filteredCategory = filterProducts(women);
 
-  function onChangeCategory(event) {
+  function onChangeCategory(e) {
     setFilters({
       ...filters,
-      category: event.target.value,
+      category: e.target.value,
     });
   }
 
@@ -40,6 +41,7 @@ export function HeroWomen() {
               <label htmlFor="category" className="text-lg">
                 Categoría
               </label>
+
               <select
                 className="cursor-pointer border border-slate-900"
                 id="category"
@@ -47,8 +49,8 @@ export function HeroWomen() {
               >
                 <option value="all">Todas</option>
                 <option value="camiseta">Camiseta</option>
-                <option value="sombrero">Sombrero</option>
                 <option value="zapatos">Zapatos</option>
+                <option value="sombrero">Sombrero</option>
               </select>
             </article>
           </div>

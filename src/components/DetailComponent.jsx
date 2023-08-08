@@ -9,24 +9,13 @@ import { CarListContext } from "../context/CarList";
 
 export function DetailComponent() {
   const { women } = useContext(ProductContext);
-  const { addToCart } = useContext(CarListContext);
+  const { detail, setDetail, addToCart } = useContext(CarListContext);
 
   const params = useParams();
 
   const [product, setProduct] = useState({});
-  
+
   const [disabledBtn, setDisabledBtn] = useState(true);
-
-  const [detail, setDetail] = useState({
-    id: "",
-    title: "",
-    image: "",
-    price: "",
-    discount: "",
-    category: "",
-    color: "",
-  });
-
 
   useEffect(() => {
     const detailFound = women.find((element) => element.id === params.id);
@@ -57,7 +46,7 @@ export function DetailComponent() {
           </p>
         </article>
 
-        <article className="grid gap-1">
+        <article className="flex gap-2">
           <p className="text-lg font-extralight">Color</p>
 
           <div>
@@ -68,81 +57,64 @@ export function DetailComponent() {
         <article className="grid gap-1">
           <p className="text-lg font-extralight">Tallas</p>
           {disabledBtn ? (
-            <span className="text-sm font-thin text-red-400">Seleccione una talla</span>
+            <span className="text-sm font-thin text-red-600">
+              Seleccione una talla
+            </span>
           ) : (
             ""
           )}
 
-          <div className="flex gap-1.5">
-            <BtnSize
-              setProduct={setProduct}
-              detail={detail}
-              setDisabledBtn={setDisabledBtn}
+          <div className="grid justify-start gap-1.5">
+            <div className="flex gap-1.5">
+              <BtnSize
+                setProduct={setProduct}
+                detail={detail}
+                setDisabledBtn={setDisabledBtn}
+                disabledBtn={disabledBtn}
+              >
+                XS
+              </BtnSize>
+              <BtnSize
+                setProduct={setProduct}
+                detail={detail}
+                setDisabledBtn={setDisabledBtn}
+              >
+                S
+              </BtnSize>
+              <BtnSize
+                setProduct={setProduct}
+                detail={detail}
+                setDisabledBtn={setDisabledBtn}
+              >
+                M
+              </BtnSize>
+              <BtnSize
+                setProduct={setProduct}
+                detail={detail}
+                setDisabledBtn={setDisabledBtn}
+              >
+                L
+              </BtnSize>
+              <BtnSize
+                setProduct={setProduct}
+                detail={detail}
+                setDisabledBtn={setDisabledBtn}
+              >
+                XL
+              </BtnSize>
+            </div>
+
+            <p className="font-extralight">Guía de tallas</p>
+
+            <BtnAdd
+              product={product}
+              addToCart={addToCart}
               disabledBtn={disabledBtn}
-            >
-              XS
-            </BtnSize>
-            <BtnSize
-              setProduct={setProduct}
-              detail={detail}
-              setDisabledBtn={setDisabledBtn}
-            >
-              S
-            </BtnSize>
-            <BtnSize
-              setProduct={setProduct}
-              detail={detail}
-              setDisabledBtn={setDisabledBtn}
-            >
-              M
-            </BtnSize>
-            <BtnSize
-              setProduct={setProduct}
-              detail={detail}
-              setDisabledBtn={setDisabledBtn}
-            >
-              L
-            </BtnSize>
-            <BtnSize
-              setProduct={setProduct}
-              detail={detail}
-              setDisabledBtn={setDisabledBtn}
-            >
-              XL
-            </BtnSize>
+            />
           </div>
-
-          <p className="font-extralight">Guía de tallas</p>
         </article>
-
-        <BtnAdd
-          product={product}
-          addToCart={addToCart}
-          disabledBtn={disabledBtn}
-        />
       </section>
     </main>
-  );
-}
-
-function BtnColor({ detailColor }) {
-  function color() {
-    switch (detailColor) {
-      case "white":
-        return "text-white border border-black rounded-3xl";
-      case "black":
-        return "text-black";
-      case "red":
-        return "text-red-400";
-      default:
-        return "";
-    }
-  }
-
-  return (
-    <>
-      <BsCircleFill className={color()} size={40} />
-    </>
   );
 }
 
@@ -152,7 +124,8 @@ function BtnSize({ children, setProduct, detail, setDisabledBtn }) {
       <button
         className="w-7 h-7 flex items-center justify-center text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2  dark:hover:bg-gray-700 cursor-pointer hover:text-white focus:outline-none focus:ring focus:ring-black"
         onClick={() => {
-          setProduct({ ...detail, size: children.toLowerCase() }), setDisabledBtn(false);
+          setProduct({ ...detail, size: children.toLowerCase() }),
+            setDisabledBtn(false);
         }}
       >
         {children}
@@ -175,16 +148,14 @@ function BtnAdd({ product, addToCart, disabledBtn }) {
 
   return (
     <>
-      <div className="flex justify-start items-center">
-        <button
-          type="button"
-          onClick={openModal}
-          className="text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2 dark:hover:bg-gray-700"
-          disabled={disabledBtn}
-        >
-          Añadir al carrito
-        </button>
-      </div>
+      <button
+        type="button"
+        onClick={openModal}
+        className="flex-grow text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2 dark:hover:bg-gray-700"
+        disabled={disabledBtn}
+      >
+        Añadir al carrito
+      </button>
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -274,6 +245,27 @@ function BtnAdd({ product, addToCart, disabledBtn }) {
           </div>
         </Dialog>
       </Transition>
+    </>
+  );
+}
+
+function BtnColor({ detailColor }) {
+  function color() {
+    switch (detailColor) {
+      case "white":
+        return "text-white border border-black rounded-3xl";
+      case "black":
+        return "text-black";
+      case "red":
+        return "text-red-400";
+      default:
+        return "";
+    }
+  }
+
+  return (
+    <>
+      <BsCircleFill className={color()} size={40} />
     </>
   );
 }

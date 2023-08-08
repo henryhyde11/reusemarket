@@ -8,7 +8,7 @@ export function CarForm() {
     if (cart == 0) {
       return (
         <li className="text-center">
-          <h1 className="p-2 text-2xl text-white font-semibold bg-sky-400 rounded-3xl">
+          <h1 className="p-2 text-2xl text-white font-semibold bg-sky-500 rounded-3xl">
             Añadir elementos al carrito
           </h1>
         </li>
@@ -31,7 +31,7 @@ export function CarForm() {
   return (
     <>
       <main className="w-full grid">
-        <h2 className="p-5 text-2xl text-center font-normal lg:text-3xl">
+        <h2 className="p-5 text-2xl text-center font-medium lg:text-3xl">
           Información de entrega
         </h2>
 
@@ -39,7 +39,7 @@ export function CarForm() {
           <section className="w-full grid gap-5 sm:max-w-md lg:order-2 lg:h-fit">
             <div className="flex items-center justify-between lg:">
               <h4 className="text-2xl">Tu carrito</h4>
-              <span className="px-2 text-white rounded-full bg-slate-500">
+              <span className="px-2 text-white rounded-full bg-sky-500">
                 0
               </span>
             </div>
