@@ -4,28 +4,27 @@ import { CarListContext } from "../context/CarList";
 export function CarForm() {
   const { cart } = useContext(CarListContext);
 
-  function showCart() {
+  function showProducts() {
     if (cart == 0) {
-      return (
-        <li className="text-center">
-          <h1 className="p-2 text-2xl text-white font-semibold bg-sky-500 rounded-3xl">
-            Añadir elementos al carrito
-          </h1>
-        </li>
-      );
+      return <h1>Añadir elementos al carrito</h1>;
     } else {
-      cart.map((element) => (
-        <li className="flex justify-between p-3 border border-gray-900">
+      return cart.map((element) => (
+        <li className="p-3 border border-gray-900">
           <div className="flex flex-col gap-2">
-            <h6 className="text-lg">{element.title}</h6>
-            <div className="w-24 h-24 rounded-lg bg-gray-500"></div>
+            <div className="flex justify-between">
+              <h6 className="text-xl">{element.title}</h6>
+              <h6 className="text-xl">$ {element.price}</h6>
+            </div>
+            <img
+              src={element.image}
+              className="w-32 h-32 rounded-lg object-cover"
+              alt="image-car"
+            />
           </div>
           <span></span>
         </li>
       ));
     }
-
-    console.log(cart)
   }
 
   return (
@@ -39,12 +38,10 @@ export function CarForm() {
           <section className="w-full grid gap-5 sm:max-w-md lg:order-2 lg:h-fit">
             <div className="flex items-center justify-between lg:">
               <h4 className="text-2xl">Tu carrito</h4>
-              <span className="px-2 text-white rounded-full bg-sky-500">
-                0
-              </span>
+              <span className="px-2 text-white rounded-full bg-sky-500">0</span>
             </div>
 
-            <ul className="grid">{showCart()}</ul>
+            <ul className="grid gap-4">{showProducts()}</ul>
 
             <form>
               <div className="grid grid-cols-2 gap-4">
