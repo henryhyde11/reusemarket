@@ -33,10 +33,6 @@ export function CarForm() {
   return (
     <>
       <main className="w-full grid">
-        <h2 className="p-5 text-2xl text-center font-medium lg:text-3xl">
-          Información de entrega
-        </h2>
-
         <div className="w-full grid gap-6 p-5 justify-items-center lg:grid-cols-2">
           <section className="w-full grid gap-5 sm:max-w-md lg:order-2 lg:h-fit">
             <div className="flex items-center justify-between lg:">
@@ -76,7 +72,10 @@ export function CarForm() {
             </form>
           </section>
 
-          <section className="w-full grid sm:max-w-md lg:w-full lg:h-fit">
+          <section className="w-full grid gap-4 sm:max-w-md lg:w-full lg:h-fit">
+            <h2 className="text-2xl font-normal">
+              Información de entrega
+            </h2>
             <form className="grid gap-4">
               <div className="grid gap-4">
                 <FormInput type={"text"} placeholder={"Nombres"} />
