@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState, useContext} from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
@@ -7,8 +7,12 @@ import { Bars3Icon } from "@heroicons/react/20/solid";
 import { FaShoppingCart } from "react-icons/fa";
 import logoIcon from "/logo.svg";
 
+import { CarListContext } from "../context/CarList";
+
 export function Header() {
   const location = useLocation();
+
+  const {cart} = useContext(CarListContext)
 
   const [isFixed, setIsFixed] = useState(false);
 
@@ -97,7 +101,7 @@ export function Header() {
                   className="text-xs text-white rounded-full bg-sky-500 absolute left-2 bottom-2"
                   style={{ padding: "0px 5px" }}
                 >
-                  0
+                  {cart.length}
                 </span>
               </Link>
             </div>

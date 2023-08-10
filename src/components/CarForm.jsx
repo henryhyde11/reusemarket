@@ -2,14 +2,18 @@ import { useContext } from "react";
 import { CarListContext } from "../context/CarList";
 
 export function CarForm() {
-  const { cart } = useContext(CarListContext);
+  const { cart, totalPrice } = useContext(CarListContext);
 
   function showProducts() {
-    if (cart == 0) {
-      return <h1>Añadir elementos al carrito</h1>;
+    if (cart.length === 0) {
+      return (
+        <div className="p-2 text-xl md:text-2xl text-white text-center bg-sky-500">
+          <h1>Añade elementos al carrito</h1>
+        </div>
+      );
     } else {
       return cart.map((element) => (
-        <li className="p-3 border border-gray-900">
+        <li key={element.id} className="p-3 border border-gray-900">
           <div className="flex flex-col gap-2">
             <div className="flex justify-between">
               <h6 className="text-xl">{element.title}</h6>
@@ -21,7 +25,6 @@ export function CarForm() {
               alt="image-car"
             />
           </div>
-          <span></span>
         </li>
       ));
     }
@@ -38,10 +41,23 @@ export function CarForm() {
           <section className="w-full grid gap-5 sm:max-w-md lg:order-2 lg:h-fit">
             <div className="flex items-center justify-between lg:">
               <h4 className="text-2xl">Tu carrito</h4>
-              <span className="px-2 text-white rounded-full bg-sky-500">0</span>
+              <span className="px-2 text-white rounded-full bg-sky-500">
+                {cart.length}
+              </span>
             </div>
 
             <ul className="grid gap-4">{showProducts()}</ul>
+
+            {cart == 0 ? (
+              ""
+            ) : (
+              <div className="p-2 flex flex-col gap-2 border border-gray-900">
+                <div className="flex justify-between">
+                  <h5 className="text-xl font-medium">Total a pagar</h5>
+                  <h5 className="text-xl font-medium">${totalPrice(cart)}</h5>
+                </div>
+              </div>
+            )}
 
             <form>
               <div className="grid grid-cols-2 gap-4">
@@ -60,7 +76,7 @@ export function CarForm() {
             </form>
           </section>
 
-          <section className="w-full grid sm:max-w-md lg:w-full">
+          <section className="w-full grid sm:max-w-md lg:w-full lg:h-fit">
             <form className="grid gap-4">
               <div className="grid gap-4">
                 <FormInput type={"text"} placeholder={"Nombres"} />

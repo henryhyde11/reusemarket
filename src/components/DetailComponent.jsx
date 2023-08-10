@@ -2,14 +2,14 @@ import { BsCircleFill } from "react-icons/bs";
 
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useContext, useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { ProductContext } from "../context/Product";
 import { CarListContext } from "../context/CarList";
 
 export function DetailComponent() {
   const { women } = useContext(ProductContext);
-  const { detail, setDetail, cart, addToCart } = useContext(CarListContext);
+  const { detail, setDetail } = useContext(CarListContext);
 
   const params = useParams();
 
@@ -108,9 +108,7 @@ export function DetailComponent() {
 
             <BtnAdd
               product={product}
-              addToCart={addToCart}
               disabledBtn={disabledBtn}
-              cart={cart}
             />
           </div>
         </article>
@@ -135,8 +133,10 @@ function BtnSize({ children, setProduct, detail, setDisabledBtn }) {
   );
 }
 
-function BtnAdd({ product, cart, addToCart, disabledBtn }) {
+function BtnAdd({ product, disabledBtn }) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const {addToCart} = useContext(CarListContext);
 
   const navigate = useNavigate();
 
@@ -144,7 +144,7 @@ function BtnAdd({ product, cart, addToCart, disabledBtn }) {
     setIsOpen(false);
   }
 
-  function openModal() {
+  function openModalAddToCart() {
     setIsOpen(true);
     addToCart(product);
   }
@@ -153,7 +153,7 @@ function BtnAdd({ product, cart, addToCart, disabledBtn }) {
     <>
       <button
         type="button"
-        onClick={openModal}
+        onClick={openModalAddToCart}
         className="flex-grow text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2 dark:hover:bg-gray-700"
         disabled={disabledBtn}
       >
