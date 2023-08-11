@@ -1,10 +1,17 @@
 import { useContext } from "react";
 import { CarListContext } from "../context/CarList";
+import { useForm } from "react-hook-form";
 
 import { BsFillCartXFill } from "react-icons/bs";
 
 export function CarForm() {
   const { cart, totalPrice } = useContext(CarListContext);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   function showProducts() {
     if (cart.length === 0) {
@@ -28,10 +35,13 @@ export function CarForm() {
     }
   }
 
+  console.log(errors);
+
   return (
     <>
       <main className="w-full grid">
-        {cart.length === 0 ? (
+        {/* CAMBIAR */}
+        {cart.length === [] ? (
           <>
             <div className="p-6 flex flex-col gap-4 items-center text-black">
               <h1 className="text-4xl">
@@ -50,13 +60,16 @@ export function CarForm() {
                     {cart.length}
                   </span>
                 </div>
+
                 <ul className="grid gap-4">{showProducts()}</ul>
+
                 <div className="p-2 flex flex-col gap-2 border border-gray-900">
                   <div className="flex justify-between">
                     <h5 className="text-xl font-medium">Total a pagar</h5>
                     <h5 className="text-xl font-medium">${totalPrice(cart)}</h5>
                   </div>
                 </div>
+
                 <form>
                   <div className="grid grid-cols-2 gap-4">
                     <input
@@ -73,33 +86,84 @@ export function CarForm() {
                   </div>
                 </form>
               </section>
+
               <section className="w-full grid gap-4 sm:max-w-md lg:w-full lg:h-fit">
                 <h2 className="text-2xl font-normal">Información de entrega</h2>
 
-                <form className="grid gap-4">
+                <form
+                  className="grid gap-4"
+                  onSubmit={handleSubmit((data) => console.log(data))}
+                >
                   <div className="grid gap-4">
-                    <input
-                      className="p-1 border border-slate-900"
-                      placeholder="Nombres"
-                      type="text"
-                    />
+                    <div className="grid">
+                      <input
+                        className="p-1 border border-slate-900"
+                        placeholder="Nombres"
+                        type="text"
+                        {...register("nombres", {
+                          required: {
+                            value: true,
+                            message: "El nombre es requerido",
+                          },
+                          minLength: {
+                            value: 2,
+                            message:
+                              "El nombre debe ser de al menos 2 caracteres",
+                          },
+                        })}
+                      />
+
+                      {errors.nombres && (
+                        <span className="text-red-500">
+                          {errors.nombres.message}
+                        </span>
+                      )}
+                    </div>
+
                     <input
                       className="p-1 border border-slate-900"
                       placeholder="Apellidos"
-                      type=""
+                      type="text"
+                      {...register("apellidos")}
                     />
-                    <input
-                      className="p-1 border border-slate-900"
-                      placeholder="Email"
-                    />
+
+                    <div className="grid">
+                      <input
+                        className="p-1 border border-slate-900"
+                        placeholder="Email"
+                        type="text"
+                        {...register("email", {
+                          required: {
+                            value: true,
+                            message: "Correo no válido",
+                          },
+                          pattern: {
+                            value:
+                              /^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/,
+                            message: "Correo no válido",
+                          },
+                        })}
+                      />
+                      {errors.email && (
+                        <span className="text-red-500">
+                          {errors.email.message}
+                        </span>
+                      )}
+                    </div>
+
                     <input
                       className="p-1 border border-slate-900"
                       placeholder="Dirección"
+                      type="text"
+                      {...register("direccion")}
                     />
 
                     <div className="max-sm:grid max-sm:gap-4 sm:flex sm:justify-between">
                       <div className="flex flex-col gap-1 text-md">
-                        <select className="sm:w-24 p-1 border border-slate-900">
+                        <select
+                          className="sm:w-24 p-1 border border-slate-900"
+                          {...register("pais")}
+                        >
                           <option hidden>País</option>
                           <option>Colombia</option>
                           <option>Panamá</option>
@@ -111,6 +175,7 @@ export function CarForm() {
                         <select
                           className="sm:w-24 p-1 border border-slate-900"
                           placeholder="ciudad"
+                          {...register("ciudad")}
                         >
                           <option hidden>Ciudad</option>
                           <option>Medellín</option>
@@ -122,8 +187,9 @@ export function CarForm() {
                       <div className="flex flex-col text-md">
                         <input
                           className="p-1 sm:w-28 border border-slate-900"
-                          type="text"
+                          type="number"
                           placeholder="Código postal"
+                          {...register("codigoPostal")}
                         />
                       </div>
                     </div>
@@ -136,17 +202,17 @@ export function CarForm() {
 
                     <div className="flex flex-col">
                       <div className="flex gap-2">
-                        <input type="radio" />
+                        <input type="radio" {...register("tarjetaCredito")} />
                         <label className="text-lg">Tarjeta de crédito</label>
                       </div>
 
                       <div className="flex gap-2">
-                        <input type="radio" />
+                        <input type="radio" {...register("tarjetaDebito")} />
                         <label className="text-lg">Tarjeta de débito</label>
                       </div>
 
                       <div className="flex gap-2">
-                        <input type="radio" />
+                        <input type="radio" {...register("tranferencia")} />
                         <label className="text-lg">Transferencia</label>
                       </div>
                     </div>
@@ -157,21 +223,25 @@ export function CarForm() {
                       className="p-1 border border-slate-900"
                       placeholder="Nombre en la tarjeta"
                       type="text"
+                      {...register("nombreTarjeta")}
                     />
                     <input
                       className="p-1 border border-slate-900"
                       placeholder="Número de la tarjeta"
                       type="text"
+                      {...register("numeroTarjeta")}
                     />
                     <input
                       className="p-1 border border-slate-900"
                       placeholder="Fecha de expedición"
                       type="text"
+                      {...register("fechaExpedicion")}
                     />
                     <input
                       className="p-1 border border-slate-900"
                       placeholder="CVC"
                       type="text"
+                      {...register("cvc")}
                     />
                   </div>
 
