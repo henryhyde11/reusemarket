@@ -2,12 +2,12 @@ import { useContext } from "react";
 import { HeroPerson } from "../components/HeroPerson";
 import { ProductContext } from "../context/Product";
 
-export function HeroMen() {
+export function HeroKids() {
   const { women, filterProducts } = useContext(ProductContext);
 
   const props = {
-    h1: "Hombre",
-    p: "Bienvenido a nuestra colección para hombres, donde la calidad y el estilo se unen para brindarte lo mejor en moda y funcionalidad",
+    h1: "Niños",
+    p: "¡La diversión y la alegría están aseguradas con nuestra adorable colección de productos para niños! Diseñados para acompañar a los más pequeños en todas sus aventuras",
   };
 
   const filteredCategory = filterProducts(women);
