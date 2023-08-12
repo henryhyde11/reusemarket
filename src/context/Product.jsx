@@ -11,6 +11,13 @@ export function ProductContextProvider({ children }) {
     category: "all",
   });
 
+  function onChangeCategory(e) {
+    setFilters({
+      ...filters,
+      category: e.target.value,
+    });
+  }
+
   function filterProducts(products) {
     return products.filter((product) => {
       return (
@@ -21,7 +28,7 @@ export function ProductContextProvider({ children }) {
 
   return (
     <ProductContext.Provider
-      value={{ ...productsState, filters, setFilters, filterProducts }}
+      value={{ ...productsState, filters, setFilters, filterProducts, onChangeCategory }}
     >
       {children}
     </ProductContext.Provider>

@@ -13,6 +13,7 @@ export function CarListContextProvider({ children }) {
     color: "",
   });
 
+
   const [cart, setCart] = useState([]);
 
   function addToCart(product) {
