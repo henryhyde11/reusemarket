@@ -238,7 +238,7 @@ function BtnAdd({ product, disabledBtn }) {
                           className="text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2  dark:hover:bg-gray-700"
                           onClick={(e) => {
                             e.preventDefault;
-                            navigate("/car");
+                            navigate("/cart");
                           }}
                         >
                           Ver carrito
