@@ -10,6 +10,7 @@ export function CarForm() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
 
@@ -35,19 +36,17 @@ export function CarForm() {
     }
   }
 
-  const [check, setCheck] = useState(0);
-
   return (
     <>
       <main className="w-full grid">
         {/* CAMBIAR */}
         {cart.length === [] ? (
           <>
-            <div className="p-6 flex flex-col gap-4 items-center text-black">
-              <h1 className="text-4xl">
+            <div className="py-10 flex flex-col gap-4 items-center text-black">
+              <h1 className="text-center max-sm:text-2xl sm:text-4xl">
                 Carrito vacío: añade elementos al carrito
               </h1>
-              <BsFillCartXFill className="w-60 h-60" />
+              <BsFillCartXFill className="w-52 h-52" />
             </div>
           </>
         ) : (
@@ -70,10 +69,10 @@ export function CarForm() {
                   </div>
                 </div>
 
-                <form>
+                {/* <form>
                   <div className="grid grid-cols-2 gap-4">
                     <input
-                      className="p-1 border border-slate-900"
+                      className="w-full p-1 border border-slate-900"
                       type="text"
                       placeholder="Código del bono"
                     />
@@ -84,7 +83,7 @@ export function CarForm() {
                       Redimir
                     </button>
                   </div>
-                </form>
+                </form> */}
               </section>
 
               <section className="w-full grid gap-4 sm:max-w-md lg:w-full lg:h-fit">
@@ -97,7 +96,7 @@ export function CarForm() {
                   <div className="grid gap-4">
                     <div className="grid">
                       <input
-                        className="p-1 border border-slate-900"
+                        className="w-full p-1 border border-slate-900"
                         placeholder="Nombres"
                         type="text"
                         {...register("nombres", {
@@ -122,7 +121,7 @@ export function CarForm() {
 
                     <div className="grid">
                       <input
-                        className="p-1 border border-slate-900"
+                        className="w-full p-1 border border-slate-900"
                         placeholder="Apellidos"
                         type="text"
                         {...register("apellidos", {
@@ -141,7 +140,7 @@ export function CarForm() {
 
                     <div className="grid">
                       <input
-                        className="p-1 border border-slate-900"
+                        className="w-full p-1 border border-slate-900"
                         placeholder="Email"
                         type="text"
                         {...register("email", {
@@ -165,7 +164,7 @@ export function CarForm() {
 
                     <div className="grid">
                       <input
-                        className="p-1 border border-slate-900"
+                        className="w-full p-1 border border-slate-900"
                         placeholder="Dirección"
                         type="text"
                         {...register("direccion", {
@@ -188,7 +187,7 @@ export function CarForm() {
                       <div className="max-sm:flex max-sm:flex-col max-sm:gap-4 sm:grid sm:grid-cols-2 sm:gap-4">
                         <article className="flex flex-col">
                           <input
-                            className="p-1 border border-slate-900"
+                            className="w-full p-1 border border-slate-900"
                             placeholder="País"
                             {...register("pais", {
                               required: {
@@ -206,7 +205,7 @@ export function CarForm() {
 
                         <article className="flex flex-col">
                           <input
-                            className="p-1 border border-slate-900"
+                            className="w-full p-1 border border-slate-900"
                             placeholder="Departamento"
                             {...register("departamento", {
                               required: {
@@ -226,7 +225,7 @@ export function CarForm() {
                       <div className="max-sm:flex max-sm:flex-col max-sm:gap-4 sm:grid sm:grid-cols-2 sm:gap-4">
                         <article className="flex flex-col">
                           <input
-                            className="p-1 border border-slate-900"
+                            className="w-full p-1 border border-slate-900"
                             placeholder="Ciudad"
                             {...register("ciudad", {
                               required: {
@@ -244,7 +243,7 @@ export function CarForm() {
 
                         <article className="flex flex-col">
                           <input
-                            className="p-1 border border-slate-900"
+                            className="w-full p-1 border border-slate-900"
                             type="number"
                             placeholder="Código postal"
                             {...register("codigoPostal", {
@@ -266,91 +265,37 @@ export function CarForm() {
 
                   {/* MÉTODO DE PAGO */}
 
-                  {console.log(errors)}
+                  <h4 className="text-2xl font-normal">Información de pago</h4>
 
-                  <div className="grid gap-2">
-                    <h4 className="text-2xl font-normal">
-                      Información de pago
-                    </h4>
-
-                    <div className="flex flex-col">
-                      <div className="flex gap-2">
-                        <input
-                          type="radio"
-                          value="credito"
-                          onClick={() => setCheck(1)}
-                          checked={check === 1 ? true : false}
-                          {...register("pago", {
-                            required: {
-                              value: true,
-                              message: "Forma de pago requerido",
-                            },
-                          })}
-                        />
-                        <label
-                          className="text-lg cursor-pointer"
-                          onClick={() => setCheck(1)}
-                        >
-                          Tarjeta de crédito
-                        </label>
-                      </div>
-
-                      <div className="flex gap-2">
-                        <input
-                          type="radio"
-                          value="debito"
-                          onClick={() => setCheck(2)}
-                          checked={check === 2 ? true : false}
-                          {...register("pago", {
-                            required: {
-                              value: true,
-                              message: "Forma de pago requerido",
-                            },
-                          })}
-                        />
-                        <label
-                          className="text-lg cursor-pointer"
-                          onClick={() => setCheck(2)}
-                        >
-                          Tarjeta de débito
-                        </label>
-                      </div>
-
-                      <div className="flex gap-2">
-                        <input
-                          type="radio"
-                          value="transferencia"
-                          onClick={() => setCheck(3)}
-                          checked={check === 3 ? true : false}
-                          {...register("pago", {
-                            required: {
-                              value: true,
-                              message: "Forma de pago requerido",
-                            },
-                          })}
-                        />
-                        <label
-                          className="text-lg cursor-pointer"
-                          onClick={() => setCheck(3)}
-                        >
-                          Transferencia
-                        </label>
-                      </div>
-                      {errors.pago && (
-                        <span className="text-xs text-red-500">
-                          {errors.pago.message}
-                        </span>
-                      )}
-                    </div>
+                  <div className="flex flex-col">
+                    <select
+                      className="w-full p-1 border border-slate-900 truncate"
+                      {...register("metodo", {
+                        required: {
+                          value: true,
+                          message: "Método de pago requerido",
+                        },
+                      })}
+                    >
+                      <option hidden value="">Seleccione un método de pago</option>
+                      <option value="credito">Tarjeta de crédito</option>
+                      <option value="debito">Tarjeta de débito</option>
+                      <option value="transferencia">Transferencia</option>
+                    </select>
+                    {errors.metodo && (
+                      <span className="text-xs text-red-500">
+                        {errors.metodo.message}
+                      </span>
+                    )}
                   </div>
 
                   {/* INFORMACION DE PAGO */}
 
-                  {check === 1 || check === 2 ? (
+                  { watch("metodo") === "credito" || watch("metodo") === "debito" ? (
                     <section className="grid gap-4">
                       <div className="flex flex-col">
                         <input
-                          className="p-1 border border-slate-900"
+                          className="w-full p-1 border border-slate-900"
                           placeholder="Nombre en la tarjeta"
                           type="text"
                           {...register("nombreTarjeta", {
@@ -369,7 +314,7 @@ export function CarForm() {
 
                       <div className="flex flex-col">
                         <input
-                          className="p-1 border border-slate-900"
+                          className="w-full p-1 border border-slate-900"
                           placeholder="Número de la tarjeta"
                           type="number"
                           {...register("numeroTarjeta", {
@@ -392,7 +337,7 @@ export function CarForm() {
 
                       <div className="flex flex-col">
                         <input
-                          className="p-1 border border-slate-900"
+                          className="w-full p-1 border border-slate-900"
                           placeholder="CVC"
                           type="number"
                           {...register("cvc", {
