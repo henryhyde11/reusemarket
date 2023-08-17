@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CarListContext } from "../context/CarList";
 import { useForm } from "react-hook-form";
 
@@ -35,7 +35,7 @@ export function CarForm() {
     }
   }
 
-  console.log(errors);
+  const [check, setCheck] = useState(0);
 
   return (
     <>
@@ -103,7 +103,7 @@ export function CarForm() {
                         {...register("nombres", {
                           required: {
                             value: true,
-                            message: "El nombre es requerido",
+                            message: "Nombre requerido",
                           },
                           minLength: {
                             value: 2,
@@ -114,18 +114,30 @@ export function CarForm() {
                       />
 
                       {errors.nombres && (
-                        <span className="text-red-500">
+                        <span className="text-xs text-red-500">
                           {errors.nombres.message}
                         </span>
                       )}
                     </div>
 
-                    <input
-                      className="p-1 border border-slate-900"
-                      placeholder="Apellidos"
-                      type="text"
-                      {...register("apellidos")}
-                    />
+                    <div className="grid">
+                      <input
+                        className="p-1 border border-slate-900"
+                        placeholder="Apellidos"
+                        type="text"
+                        {...register("apellidos", {
+                          required: {
+                            value: true,
+                            message: "Apellidos requeridos",
+                          },
+                        })}
+                      />
+                      {errors.apellidos && (
+                        <span className="text-xs text-red-500">
+                          {errors.apellidos.message}
+                        </span>
+                      )}
+                    </div>
 
                     <div className="grid">
                       <input
@@ -135,65 +147,126 @@ export function CarForm() {
                         {...register("email", {
                           required: {
                             value: true,
-                            message: "Correo no válido",
+                            message: "Correo requerido",
                           },
                           pattern: {
                             value:
                               /^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/,
-                            message: "Correo no válido",
+                            message: "Correo inválido",
                           },
                         })}
                       />
                       {errors.email && (
-                        <span className="text-red-500">
+                        <span className="text-xs text-red-500">
                           {errors.email.message}
                         </span>
                       )}
                     </div>
 
-                    <input
-                      className="p-1 border border-slate-900"
-                      placeholder="Dirección"
-                      type="text"
-                      {...register("direccion")}
-                    />
-
-                    <div className="max-sm:grid max-sm:gap-4 sm:flex sm:justify-between">
-                      <div className="flex flex-col gap-1 text-md">
-                        <select
-                          className="sm:w-24 p-1 border border-slate-900"
-                          {...register("pais")}
-                        >
-                          <option hidden>País</option>
-                          <option>Colombia</option>
-                          <option>Panamá</option>
-                          <option>México</option>
-                        </select>
-                      </div>
-
-                      <div className="flex flex-col text-md">
-                        <select
-                          className="sm:w-24 p-1 border border-slate-900"
-                          placeholder="ciudad"
-                          {...register("ciudad")}
-                        >
-                          <option hidden>Ciudad</option>
-                          <option>Medellín</option>
-                          <option>Bello</option>
-                          <option>París</option>
-                        </select>
-                      </div>
-
-                      <div className="flex flex-col text-md">
-                        <input
-                          className="p-1 sm:w-28 border border-slate-900"
-                          type="number"
-                          placeholder="Código postal"
-                          {...register("codigoPostal")}
-                        />
-                      </div>
+                    <div className="grid">
+                      <input
+                        className="p-1 border border-slate-900"
+                        placeholder="Dirección"
+                        type="text"
+                        {...register("direccion", {
+                          required: {
+                            value: true,
+                            message: "Dirección requerida",
+                          },
+                        })}
+                      />
+                      {errors.direccion && (
+                        <span className="text-xs text-red-500">
+                          {errors.direccion.message}
+                        </span>
+                      )}
                     </div>
+
+                    {/* PAIS, DEPARTAMENTO, CIUDAD */}
+
+                    <section className="max-sm:grid max-sm:gap-4 sm:flex sm:flex-col sm:gap-4">
+                      <div className="max-sm:flex max-sm:flex-col max-sm:gap-4 sm:grid sm:grid-cols-2 sm:gap-4">
+                        <article className="flex flex-col">
+                          <input
+                            className="p-1 border border-slate-900"
+                            placeholder="País"
+                            {...register("pais", {
+                              required: {
+                                value: true,
+                                message: "País requerido",
+                              },
+                            })}
+                          />
+                          {errors.pais && (
+                            <span className="text-xs text-red-500">
+                              {errors.pais.message}
+                            </span>
+                          )}
+                        </article>
+
+                        <article className="flex flex-col">
+                          <input
+                            className="p-1 border border-slate-900"
+                            placeholder="Departamento"
+                            {...register("departamento", {
+                              required: {
+                                value: true,
+                                message: "Departamento requerido",
+                              },
+                            })}
+                          />
+                          {errors.departamento && (
+                            <span className="text-xs text-red-500">
+                              {errors.departamento.message}
+                            </span>
+                          )}
+                        </article>
+                      </div>
+
+                      <div className="max-sm:flex max-sm:flex-col max-sm:gap-4 sm:grid sm:grid-cols-2 sm:gap-4">
+                        <article className="flex flex-col">
+                          <input
+                            className="p-1 border border-slate-900"
+                            placeholder="Ciudad"
+                            {...register("ciudad", {
+                              required: {
+                                value: true,
+                                message: "Ciudad requerida",
+                              },
+                            })}
+                          />
+                          {errors.ciudad && (
+                            <span className="text-xs text-red-500">
+                              {errors.ciudad.message}
+                            </span>
+                          )}
+                        </article>
+
+                        <article className="flex flex-col">
+                          <input
+                            className="p-1 border border-slate-900"
+                            type="number"
+                            placeholder="Código postal"
+                            {...register("codigoPostal", {
+                              pattern: {
+                                value: /^([0-9]{6}$)/,
+                                message: "Código inválido",
+                              },
+                            })}
+                          />
+                          {errors.codigoPostal && (
+                            <span className="text-xs text-red-500">
+                              {errors.codigoPostal.message}
+                            </span>
+                          )}
+                        </article>
+                      </div>
+                    </section>
                   </div>
+
+                  {/* MÉTODO DE PAGO */}
+
+                  {console.log(errors)}
 
                   <div className="grid gap-2">
                     <h4 className="text-2xl font-normal">
@@ -202,48 +275,147 @@ export function CarForm() {
 
                     <div className="flex flex-col">
                       <div className="flex gap-2">
-                        <input type="radio" {...register("tarjetaCredito")} />
-                        <label className="text-lg">Tarjeta de crédito</label>
+                        <input
+                          type="radio"
+                          value="credito"
+                          onClick={() => setCheck(1)}
+                          checked={check === 1 ? true : false}
+                          {...register("pago", {
+                            required: {
+                              value: true,
+                              message: "Forma de pago requerido",
+                            },
+                          })}
+                        />
+                        <label
+                          className="text-lg cursor-pointer"
+                          onClick={() => setCheck(1)}
+                        >
+                          Tarjeta de crédito
+                        </label>
                       </div>
 
                       <div className="flex gap-2">
-                        <input type="radio" {...register("tarjetaDebito")} />
-                        <label className="text-lg">Tarjeta de débito</label>
+                        <input
+                          type="radio"
+                          value="debito"
+                          onClick={() => setCheck(2)}
+                          checked={check === 2 ? true : false}
+                          {...register("pago", {
+                            required: {
+                              value: true,
+                              message: "Forma de pago requerido",
+                            },
+                          })}
+                        />
+                        <label
+                          className="text-lg cursor-pointer"
+                          onClick={() => setCheck(2)}
+                        >
+                          Tarjeta de débito
+                        </label>
                       </div>
 
                       <div className="flex gap-2">
-                        <input type="radio" {...register("tranferencia")} />
-                        <label className="text-lg">Transferencia</label>
+                        <input
+                          type="radio"
+                          value="transferencia"
+                          onClick={() => setCheck(3)}
+                          checked={check === 3 ? true : false}
+                          {...register("pago", {
+                            required: {
+                              value: true,
+                              message: "Forma de pago requerido",
+                            },
+                          })}
+                        />
+                        <label
+                          className="text-lg cursor-pointer"
+                          onClick={() => setCheck(3)}
+                        >
+                          Transferencia
+                        </label>
                       </div>
+                      {errors.pago && (
+                        <span className="text-xs text-red-500">
+                          {errors.pago.message}
+                        </span>
+                      )}
                     </div>
                   </div>
 
-                  <div className="grid gap-4">
-                    <input
-                      className="p-1 border border-slate-900"
-                      placeholder="Nombre en la tarjeta"
-                      type="text"
-                      {...register("nombreTarjeta")}
-                    />
-                    <input
-                      className="p-1 border border-slate-900"
-                      placeholder="Número de la tarjeta"
-                      type="text"
-                      {...register("numeroTarjeta")}
-                    />
-                    <input
-                      className="p-1 border border-slate-900"
-                      placeholder="Fecha de expedición"
-                      type="text"
-                      {...register("fechaExpedicion")}
-                    />
-                    <input
-                      className="p-1 border border-slate-900"
-                      placeholder="CVC"
-                      type="text"
-                      {...register("cvc")}
-                    />
-                  </div>
+                  {/* INFORMACION DE PAGO */}
+
+                  {check === 1 || check === 2 ? (
+                    <section className="grid gap-4">
+                      <div className="flex flex-col">
+                        <input
+                          className="p-1 border border-slate-900"
+                          placeholder="Nombre en la tarjeta"
+                          type="text"
+                          {...register("nombreTarjeta", {
+                            required: {
+                              value: true,
+                              message: "Nombre requerido",
+                            },
+                          })}
+                        />
+                        {errors.nombreTarjeta && (
+                          <span className="text-xs text-red-500">
+                            {errors.nombreTarjeta.message}
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="flex flex-col">
+                        <input
+                          className="p-1 border border-slate-900"
+                          placeholder="Número de la tarjeta"
+                          type="number"
+                          {...register("numeroTarjeta", {
+                            required: {
+                              value: true,
+                              message: "Número requerido",
+                            },
+                            maxLength: {
+                              value: 19,
+                              message: "Número inválido",
+                            },
+                          })}
+                        />
+                        {errors.numeroTarjeta && (
+                          <span className="text-xs text-red-500">
+                            {errors.numeroTarjeta.message}
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="flex flex-col">
+                        <input
+                          className="p-1 border border-slate-900"
+                          placeholder="CVC"
+                          type="number"
+                          {...register("cvc", {
+                            required: {
+                              value: true,
+                              message: "CVC requerido",
+                            },
+                            pattern: {
+                              value: /^([0-9]{4}$)/,
+                              message: "CVC inválido",
+                            },
+                          })}
+                        />
+                        {errors.cvc && (
+                          <span className="text-xs text-red-500">
+                            {errors.cvc.message}
+                          </span>
+                        )}
+                      </div>
+                    </section>
+                  ) : (
+                    ""
+                  )}
 
                   <button
                     className="text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2  dark:hover:bg-gray-700"

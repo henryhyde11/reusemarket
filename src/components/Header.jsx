@@ -95,7 +95,7 @@ export function Header() {
 
           <div className="justify-center items-center gap-x-3 md:inline-flex">
             <div className="flex relative">
-              <Link to={"/car"}>
+              <Link to={"/cart"}>
                 <FaShoppingCart />
                 <span
                   className="text-xs text-white rounded-full bg-sky-500 absolute left-2 bottom-2"
