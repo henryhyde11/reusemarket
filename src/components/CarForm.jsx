@@ -40,7 +40,7 @@ export function CarForm() {
     <>
       <main className="w-full grid">
         {/* CAMBIAR */}
-        {cart.length === [] ? (
+        {cart.length === 0 ? (
           <>
             <div className="py-10 flex flex-col gap-4 items-center text-black">
               <h1 className="text-center max-sm:text-2xl sm:text-4xl">
