@@ -180,15 +180,16 @@ function Dropdown({ dark }) {
             </Menu.Item>
           </div>
           <div className="px-1 py-1">
-            <Menu.Item>
+          <Menu.Item>
               {({ active }) => (
-                <button
+                <Link
+                  to={"/we"}
                   className={`${
                     active ? "bg-slate-700 text-white" : "text-black"
                   } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                 >
                   Nosotros
-                </button>
+                </Link>
               )}
             </Menu.Item>
             <Menu.Item disabled>

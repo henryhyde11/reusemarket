@@ -24,6 +24,7 @@ export function HeroHome() {
         src={homeImageSmall}
         className="min-w-0 max-w-full sm:hidden"
         alt="home-img-small"
+        loading="lazy"
       />
 
       <img
