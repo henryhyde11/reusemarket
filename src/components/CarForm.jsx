@@ -23,7 +23,7 @@ export function CarForm() {
         <li key={element.id} className="p-3 border border-gray-900">
           <section className="flex flex-col gap-2">
             <div className="flex justify-between">
-              <h6 className="sm:text-xl">{element.title}</h6>
+              <h6 className="text-xl">{element.title}</h6>
               <button onClick={() => removeElement(element)}>
                 <BiX />
               </button>
@@ -78,21 +78,21 @@ export function CarForm() {
                   </div>
                 </div>
 
-                {/* <form>
-                  <div className="grid grid-cols-2 gap-4">
+                <form>
+                  <div className="grid sm:grid-cols-2 gap-4">
                     <input
                       className="w-full p-1 border border-slate-900"
                       type="text"
                       placeholder="Código del bono"
                     />
                     <button
-                      className="text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2  dark:hover:bg-gray-700"
+                      className="text-white bg-gray-800 hover:bg-gray-900 font-medium sm:text-md p-2  dark:hover:bg-gray-700"
                       type="submit"
                     >
                       Redimir
                     </button>
                   </div>
-                </form> */}
+                </form>
               </section>
 
               <section className="w-full grid gap-4 sm:max-w-md lg:w-full lg:h-fit">
@@ -276,7 +276,7 @@ export function CarForm() {
 
                   <h4 className="text-2xl font-normal">Información de pago</h4>
 
-                  <div className="flex flex-col">
+                  <div className="flex flex-col text-lg">
                     <select
                       className="w-full p-1 border border-slate-900 truncate"
                       {...register("metodo", {
@@ -375,7 +375,7 @@ export function CarForm() {
                   )}
 
                   <button
-                    className="text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2  dark:hover:bg-gray-700"
+                    className="text-white bg-gray-800 hover:bg-gray-900 font-medium sm:text-md p-2  dark:hover:bg-gray-700"
                     type="submit"
                   >
                     Finalizar compra
