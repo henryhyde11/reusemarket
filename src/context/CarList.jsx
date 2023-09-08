@@ -13,12 +13,17 @@ export function CarListContextProvider({ children }) {
     color: "",
   });
 
-
   const [cart, setCart] = useState([]);
 
   function addToCart(product) {
     setCart([...cart, product]);
   }
+
+  function removeElement(element) {
+    let removingCar = cart.filter((elementToRemove) => elementToRemove.id !== element.id);
+    setCart(removingCar);
+  }
+
 
   function cleanCart() {
     setCart([]);
@@ -40,7 +45,7 @@ export function CarListContextProvider({ children }) {
 
   return (
     <CarListContext.Provider
-      value={{ detail, setDetail, cart, addToCart, cleanCart, totalPrice }}
+      value={{ detail, setDetail, cart, addToCart, cleanCart, totalPrice, removeElement}}
     >
       {children}
     </CarListContext.Provider>

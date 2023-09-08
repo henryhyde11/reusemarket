@@ -1,11 +1,12 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { CarListContext } from "../context/CarList";
 import { useForm } from "react-hook-form";
 
 import { BsFillCartXFill } from "react-icons/bs";
+import { BiX } from "react-icons/bi";
 
 export function CarForm() {
-  const { cart, totalPrice } = useContext(CarListContext);
+  const { cart, totalPrice, removeElement } = useContext(CarListContext);
 
   const {
     register,
@@ -20,17 +21,24 @@ export function CarForm() {
     } else {
       return cart.map((element) => (
         <li key={element.id} className="p-3 border border-gray-900">
-          <div className="flex flex-col gap-2">
+          <section className="flex flex-col gap-2">
             <div className="flex justify-between">
-              <h6 className="text-xl">{element.title}</h6>
-              <h6 className="text-xl">$ {element.price}</h6>
+              <h6 className="sm:text-xl">{element.title}</h6>
+              <button onClick={() => removeElement(element)}>
+                <BiX />
+              </button>
             </div>
-            <img
-              src={element.image}
-              className="w-32 h-32 rounded-lg object-cover"
-              alt="image-car"
-            />
-          </div>
+
+            <div className="flex justify-between items-center">
+              <img
+                src={element.image}
+                className="w-32 h-32 rounded-lg object-cover"
+                alt="image-car"
+              />
+
+              <h6 className="sm:text-xl">$ {element.price}</h6>
+            </div>
+          </section>
         </li>
       ));
     }
@@ -39,7 +47,6 @@ export function CarForm() {
   return (
     <>
       <main className="w-full grid">
-        {/* CAMBIAR */}
         {cart.length === 0 ? (
           <>
             <div className="py-10 flex flex-col gap-4 items-center text-black">
@@ -64,8 +71,10 @@ export function CarForm() {
 
                 <div className="p-2 flex flex-col gap-2 border border-gray-900">
                   <div className="flex justify-between">
-                    <h5 className="text-xl font-medium">Total a pagar</h5>
-                    <h5 className="text-xl font-medium">${totalPrice(cart)}</h5>
+                    <h5 className="sm:text-xl font-medium">Total a pagar</h5>
+                    <h5 className="sm:text-xl font-medium">
+                      $ {totalPrice(cart)}
+                    </h5>
                   </div>
                 </div>
 
@@ -277,7 +286,9 @@ export function CarForm() {
                         },
                       })}
                     >
-                      <option hidden value="">Seleccione un método de pago</option>
+                      <option hidden value="">
+                        Seleccione un método de pago
+                      </option>
                       <option value="credito">Tarjeta de crédito</option>
                       <option value="debito">Tarjeta de débito</option>
                       <option value="transferencia">Transferencia</option>
@@ -291,7 +302,8 @@ export function CarForm() {
 
                   {/* INFORMACION DE PAGO */}
 
-                  { watch("metodo") === "credito" || watch("metodo") === "debito" ? (
+                  {watch("metodo") === "credito" ||
+                  watch("metodo") === "debito" ? (
                     <section className="grid gap-4">
                       <div className="flex flex-col">
                         <input
