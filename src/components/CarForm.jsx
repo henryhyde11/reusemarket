@@ -88,6 +88,7 @@ export function CarForm() {
                     <button
                       className="text-white bg-gray-800 hover:bg-gray-900 font-medium sm:text-md p-2  dark:hover:bg-gray-700"
                       type="submit"
+                      onClick={(e) => e.preventDefault()}
                     >
                       Redimir
                     </button>
