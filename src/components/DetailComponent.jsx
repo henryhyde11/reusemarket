@@ -64,8 +64,8 @@ export function DetailComponent() {
             ""
           )}
 
-          <div className="grid justify-start gap-1.5">
-            <div className="flex gap-1.5">
+          <div className="grid gap-1.5">
+            <div className="flex justify-between gap-1.5">
               <BtnSize
                 setProduct={setProduct}
                 detail={detail}
@@ -102,14 +102,18 @@ export function DetailComponent() {
               >
                 XL
               </BtnSize>
+              <BtnSize
+                setProduct={setProduct}
+                detail={detail}
+                setDisabledBtn={setDisabledBtn}
+              >
+                2XL
+              </BtnSize>
             </div>
 
             <p className="font-extralight">Guía de tallas</p>
 
-            <BtnAdd
-              product={product}
-              disabledBtn={disabledBtn}
-            />
+            <BtnAdd product={product} disabledBtn={disabledBtn} />
           </div>
         </article>
       </section>
@@ -136,7 +140,7 @@ function BtnSize({ children, setProduct, detail, setDisabledBtn }) {
 function BtnAdd({ product, disabledBtn }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const {addToCart} = useContext(CarListContext);
+  const { addToCart } = useContext(CarListContext);
 
   const navigate = useNavigate();
 
