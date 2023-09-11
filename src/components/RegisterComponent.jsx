@@ -16,7 +16,7 @@ export function RegisterComponent() {
       <section className="flex flex-col gap-4 p-5 shadow-lg border border-slate-900 sm:w-72 md:w-80">
         <div className="grid gap-4">
           <div className="text-center">
-            <h1 className="text-3xl font-semibold">Registrate</h1>
+            <h1 className="text-3xl font-semibold">Registrarse</h1>
           </div>
 
           <div className="flex flex-col gap-4 text-md">
@@ -28,14 +28,14 @@ export function RegisterComponent() {
                 <input
                   type="text"
                   className="border border-slate-900 p-1"
-                  placeholder="Nombre"
-                  {...register("name", {
-                    required: { value: true, message: "Nombre requerido" },
+                  placeholder="Nombres"
+                  {...register("names", {
+                    required: { value: true, message: "Nombres requeridos" },
                   })}
                 />
                 {errors.email && (
                   <span className="text-xs text-red-500">
-                    {errors.name.message}
+                    {errors.names.message}
                   </span>
                 )}
               </div>
@@ -46,7 +46,7 @@ export function RegisterComponent() {
                   className="border border-slate-900 p-1"
                   placeholder="Apellidos"
                   {...register("lastName", {
-                    required: { value: true, message: "Apellido requerido" },
+                    required: { value: true, message: "Apellidos requerido" },
                   })}
                 />
                 {errors.email && (
@@ -123,9 +123,9 @@ export function RegisterComponent() {
               </button>
             </form>
 
-            <div className="flex text-center">
-              <span className="text-xs font-thin">
-                Registrandote está  s aceptando nuestros términos de uso
+            <div className="flex justify-center text-center">
+              <span className="w-3/4 text-sm font-thin">
+                Al registrarte aceptas nuestros términos de uso
               </span>
             </div>
           </div>

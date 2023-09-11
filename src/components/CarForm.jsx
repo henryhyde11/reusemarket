@@ -47,6 +47,8 @@ export function CarForm() {
   return (
     <>
       <main className="w-full grid">
+
+        {/* CAMBIAR */}
         {cart.length === 0 ? (
           <>
             <div className="py-10 flex flex-col gap-4 items-center text-black">
@@ -104,73 +106,6 @@ export function CarForm() {
                   onSubmit={handleSubmit((data) => console.log(data))}
                 >
                   <div className="grid gap-4">
-                    <div className="grid">
-                      <input
-                        className="w-full p-1 border border-slate-900"
-                        placeholder="Nombres"
-                        type="text"
-                        {...register("nombres", {
-                          required: {
-                            value: true,
-                            message: "Nombre requerido",
-                          },
-                          minLength: {
-                            value: 2,
-                            message:
-                              "El nombre debe ser de al menos 2 caracteres",
-                          },
-                        })}
-                      />
-
-                      {errors.nombres && (
-                        <span className="text-xs text-red-500">
-                          {errors.nombres.message}
-                        </span>
-                      )}
-                    </div>
-
-                    <div className="grid">
-                      <input
-                        className="w-full p-1 border border-slate-900"
-                        placeholder="Apellidos"
-                        type="text"
-                        {...register("apellidos", {
-                          required: {
-                            value: true,
-                            message: "Apellidos requeridos",
-                          },
-                        })}
-                      />
-                      {errors.apellidos && (
-                        <span className="text-xs text-red-500">
-                          {errors.apellidos.message}
-                        </span>
-                      )}
-                    </div>
-
-                    <div className="grid">
-                      <input
-                        className="w-full p-1 border border-slate-900"
-                        placeholder="Email"
-                        type="text"
-                        {...register("email", {
-                          required: {
-                            value: true,
-                            message: "Correo requerido",
-                          },
-                          pattern: {
-                            value:
-                              /^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/,
-                            message: "Correo inválido",
-                          },
-                        })}
-                      />
-                      {errors.email && (
-                        <span className="text-xs text-red-500">
-                          {errors.email.message}
-                        </span>
-                      )}
-                    </div>
 
                     <div className="grid">
                       <input

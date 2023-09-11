@@ -76,7 +76,7 @@ export function LoginComponent() {
               </button>
             </form>
 
-            <div className="flex justify-center">
+            <div className="flex justify-center cursor-pointer">
               <p className="font-extralight">¿Olvidaste la contraseña?</p>
             </div>
 
@@ -88,12 +88,12 @@ export function LoginComponent() {
               </article>
 
               <article className="flex flex-col items-center font-extralight">
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 cursor-pointer">
                   <FcGoogle />
                   Ingresa con Google
                 </div>
 
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 cursor-pointer">
                   <AiFillFacebook className="text-blue-700" />
                   Ingresa con Facebook
                 </div>
@@ -104,9 +104,12 @@ export function LoginComponent() {
       </section>
 
       <section className="p-5 font-extralight grid justify-center shadow-lg border border-slate-900 sm:flex sm:gap-1 sm:w-72 md:w-80">
-        <h2>¿No tienes una cuenta?</h2>
-
-        <Link to={"/register"}><span className="text-sky-500">Registrate</span></Link>
+        <Link to={"/register"}>
+          <h2>¿No tienes una cuenta?</h2>
+        </Link>
+        <Link to={"/register"}>
+          <span className="text-sky-500">Registrate</span>
+        </Link>
       </section>
     </main>
   );
