@@ -6,6 +6,7 @@ import { Women } from "./pages/Women";
 import { Men } from "./pages/Men";
 import { Kids } from "./pages/Kids";
 import { Login } from "./pages/Login";
+import { Register } from "./pages/Register";
 import { Car } from "./pages/Car";
 import { We } from "./pages/We";
 import { Detail } from "./pages/Detail";
@@ -23,6 +24,7 @@ export function App() {
         <Route path="/we" element={<We/>}/>
         <Route path="/cart" element={<Car/>}/>
         <Route path="/login" element={<Login/>}/>
+        <Route path="/register" element={<Register/>}/>
       </Routes>
     </>
   );

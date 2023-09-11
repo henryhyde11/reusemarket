@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import { FcGoogle } from "react-icons/fc";
 import { AiFillFacebook } from "react-icons/ai";
 import { useForm } from "react-hook-form";
@@ -103,7 +105,8 @@ export function LoginComponent() {
 
       <section className="p-5 font-extralight grid justify-center shadow-lg border border-slate-900 sm:flex sm:gap-1 sm:w-72 md:w-80">
         <h2>¿No tienes una cuenta?</h2>
-        <h2 className="text-sky-500">Registrate</h2>
+
+        <Link to={"/register"}><span className="text-sky-500">Registrate</span></Link>
       </section>
     </main>
   );
