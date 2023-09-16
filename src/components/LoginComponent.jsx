@@ -4,9 +4,10 @@ import { FcGoogle } from "react-icons/fc";
 import { AiFillFacebook } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 
-export function RegisterComponent() {
+export function LoginComponent() {
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -16,7 +17,10 @@ export function RegisterComponent() {
       <section className="flex flex-col gap-4 p-5 shadow-lg border border-slate-900 sm:w-72 md:w-80">
         <div className="grid gap-4">
           <div className="text-center">
-            <h1 className="text-3xl font-semibold">Registrarse</h1>
+            <h1 className="text-3xl font-semibold">Bienvenido</h1>
+            <p className="text-lg font-extralight">
+              Iniciar sesión para continuar
+            </p>
           </div>
 
           <div className="flex flex-col gap-4 text-md">
@@ -24,57 +28,6 @@ export function RegisterComponent() {
               className="flex flex-col gap-4 text-md"
               onSubmit={handleSubmit((data) => console.log(data))}
             >
-              <div className="grid">
-                <input
-                  type="text"
-                  className="border border-slate-900 p-1"
-                  placeholder="Nombres"
-                  {...register("names", {
-                    required: { value: true, message: "Nombres requeridos" },
-                  })}
-                />
-                {errors.email && (
-                  <span className="text-xs text-red-500">
-                    {errors.names.message}
-                  </span>
-                )}
-              </div>
-
-              <div className="grid">
-                <input
-                  type="text"
-                  className="border border-slate-900 p-1"
-                  placeholder="Apellidos"
-                  {...register("lastName", {
-                    required: { value: true, message: "Apellidos requerido" },
-                  })}
-                />
-                {errors.email && (
-                  <span className="text-xs text-red-500">
-                    {errors.lastName.message}
-                  </span>
-                )}
-              </div>
-
-              <div className="grid">
-                <input
-                  type="text"
-                  className="border border-slate-900 p-1"
-                  placeholder="Nombre de usuario"
-                  {...register("username", {
-                    required: {
-                      value: true,
-                      message: "Nombre de usuario requerido",
-                    },
-                  })}
-                />
-                {errors.email && (
-                  <span className="text-xs text-red-500">
-                    {errors.username.message}
-                  </span>
-                )}
-              </div>
-
               <div className="grid">
                 <input
                   type="text"
@@ -106,6 +59,10 @@ export function RegisterComponent() {
                       value: true,
                       message: "Contraseña requerida",
                     },
+                    minLength: {
+                      value: 8,
+                      message: "Contraseña muy corta"
+                    }
                   })}
                 />
                 {errors.password && (
@@ -119,17 +76,44 @@ export function RegisterComponent() {
                 className="text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm p-2  dark:hover:bg-gray-700"
                 type="submit"
               >
-                Registrate
+                Ingresar
               </button>
             </form>
 
-            <div className="flex justify-center text-center">
-              <span className="w-3/4 text-sm font-thin">
-                Al registrarte aceptas nuestros términos de uso
-              </span>
+            <div className="flex justify-center cursor-pointer">
+              <p className="font-extralight">¿Olvidaste la contraseña?</p>
+            </div>
+
+            <div className="">
+              <article className="flex gap-1 items-center justify-between font-extralight">
+                <div className="w-20 border-t border-gray-400 md:w-24 lg:w-28"></div>
+                <div>o</div>
+                <div className="w-20 border-t border-gray-400 md:w-24 lg:w-28"></div>
+              </article>
+
+              <article className="flex flex-col items-center font-extralight">
+                <div className="flex items-center gap-1 cursor-pointer">
+                  <FcGoogle />
+                  Ingresa con Google
+                </div>
+
+                <div className="flex items-center gap-1 cursor-pointer">
+                  <AiFillFacebook className="text-blue-700" />
+                  Ingresa con Facebook
+                </div>
+              </article>
             </div>
           </div>
         </div>
+      </section>
+
+      <section className="p-5 font-extralight grid justify-center shadow-lg border border-slate-900 sm:flex sm:gap-1 sm:w-72 md:w-80">
+        <Link to={"/register"}>
+          <h2>¿No tienes una cuenta?</h2>
+        </Link>
+        <Link to={"/register"}>
+          <span className="text-sky-500">Registrate</span>
+        </Link>
       </section>
     </main>
   );

@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState, useContext} from "react";
+import { Fragment, useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
@@ -12,14 +12,19 @@ import { CarListContext } from "../context/CarList";
 export function Header() {
   const location = useLocation();
 
-  const {cart} = useContext(CarListContext)
+  const { cart } = useContext(CarListContext);
 
   const [isFixed, setIsFixed] = useState(false);
 
   const [dark] = useState(location.pathname === "/home");
 
   function handleScroll() {
-    if (window.scrollY > 60 && location.pathname !== "/men" && location.pathname !== "/women" && location.pathname !== "/kids") {
+    if (
+      window.scrollY > 60 &&
+      location.pathname !== "/men" &&
+      location.pathname !== "/women" &&
+      location.pathname !== "/kids"
+    ) {
       setIsFixed(true);
     } else {
       setIsFixed(false);
@@ -50,6 +55,9 @@ export function Header() {
             </p>
             <p className="sm:p-2 hover:text-sky-500 cursor-pointer">
               Cambios y devoluciones
+            </p>
+            <p className="sm:p-2 hover:text-sky-500 cursor-pointer">
+              <Link to={"/reviews"}>Opiniones</Link>
             </p>
           </div>
         </nav>
@@ -180,7 +188,7 @@ function Dropdown({ dark }) {
             </Menu.Item>
           </div>
           <div className="px-1 py-1">
-          <Menu.Item>
+            <Menu.Item>
               {({ active }) => (
                 <Link
                   to={"/we"}

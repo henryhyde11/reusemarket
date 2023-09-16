@@ -47,7 +47,6 @@ export function CarForm() {
   return (
     <>
       <main className="w-full grid">
-
         {/* CAMBIAR */}
         {cart.length === 0 ? (
           <>
@@ -106,7 +105,6 @@ export function CarForm() {
                   onSubmit={handleSubmit((data) => console.log(data))}
                 >
                   <div className="grid gap-4">
-
                     <div className="grid">
                       <input
                         className="w-full p-1 border border-slate-900"

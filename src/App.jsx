@@ -16,15 +16,15 @@ export function App() {
     <>
       <Routes>
         <Route path="/" element={<Navigate to="/home" replace />} />
-        <Route path="/home" element={<Home />}/>
-        <Route path="/women" element={<Women/>}/>
-        <Route path="/men" element={<Men/>}/>
-        <Route path="/kids" element={<Kids/>}/>
-        <Route path="/detail/:id" element={<Detail/>}/>
-        <Route path="/we" element={<We/>}/>
-        <Route path="/cart" element={<Car/>}/>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/register" element={<Register/>}/>
+        <Route path="/home" element={<Home />} />
+        <Route path="/women" element={<Women />} />
+        <Route path="/men" element={<Men />} />
+        <Route path="/kids" element={<Kids />} />
+        <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/we" element={<We />} />
+        <Route path="/cart" element={<Car />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </>
   );
